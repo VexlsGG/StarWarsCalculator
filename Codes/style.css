@@ -1,0 +1,174 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Container and Calculator Styles */
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #000000 0%, #050A30 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.calculator {
+  background: #3a4452;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+
+.history-panel {
+  margin-left: 20px;
+  background: #1f2c34;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  max-width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse; /* Newest items on top */
+}
+
+
+.history-item {
+  border-bottom: 1px solid #444;
+  padding: 5px 0;
+}
+
+/* Button Styles */
+.calculator form input {
+  border: 0;
+  outline: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.calculator form input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  transform: scale(1.1);
+}
+
+.calculator form input:active {
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Display Styles */
+form .display input {
+  text-align: right;
+  font-size: 45px;
+  color: white;
+  background: transparent;
+  border: none;
+  width: 100%;
+  box-shadow: none;
+}
+
+/* Jedi Theme */
+body.jedi-theme .container {
+  background: radial-gradient(circle at 50% 50%, #000000 0%, #1D2A5B 100%);
+}
+
+body.jedi-theme .calculator form input {
+  color: #00e6ff;
+}
+
+/* Sith Theme */
+body.sith-theme .container {
+  background: radial-gradient(circle at 50% 50%, #000000 0%, #2A0000 100%);
+}
+
+body.sith-theme .calculator form input {
+  color: #FF0033;
+}
+
+body.sith-theme .calculator form input:hover {
+  box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
+}
+
+/* Switch Theme Button */
+.switch-theme-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00e6ff 0%, #FF0033 100%);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.switch-theme-button:hover {
+  transform: translateX(-50%) scale(1.1) rotate(3deg);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+}
+
+/* Cursor */
+body {
+  cursor: url('lightsaber-cursor.png'), auto;
+}
+
+/* Particle Effect */
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-animation 0.6s ease-out forwards;
+}
+
+@keyframes particle-animation {
+  from {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+  }
+  to {
+      transform: translate(100px, -100px) scale(0);
+      opacity: 0;
+  }
+}
+
+/* Shake Effect */
+.shake {
+  animation: screenShake 0.5s;
+}
+
+@keyframes screenShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
