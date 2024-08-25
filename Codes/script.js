@@ -1,52 +1,63 @@
-// Function to evaluate the expression
+// JavaScript Code for Calculator and Copy Button
+
+// Function to evaluate the expression and handle errors
 function evaluateExpression() {
-  try {
-    const display = document.querySelector('input[name="display"]');
-    const equation = display.value;
-    const result = eval(equation);
-    if (isNaN(result) || !isFinite(result)) throw new Error("Invalid Calculation");
-    const fullEquation = `${equation} = ${result}`;
-    display.value = result;
-    addToHistory(fullEquation);
-    // playSound('click-sound'); // Uncomment when audio is fixed
-  } catch (e) {
-    triggerShake();
-    display.value = "Error";
-    setTimeout(() => display.value = '', 1000); // Clear after 1 second
-    // playSound('error-sound'); // Uncomment when audio is fixed
-  }
+    const display = document.querySelector('.display input');
+    try {
+        display.value = eval(display.value) || "";
+        addHistory(display.value);
+    } catch (error) {
+        display.value = "Error";
+    }
 }
 
-// Add successful calculation to history
-function addToHistory(value) {
-  const historyDiv = document.getElementById('history');
-
-  // Check if the value already exists in history
-  const existingItems = Array.from(historyDiv.children).map(item => item.textContent);
-  if (!existingItems.includes(value)) {
-    const historyItem = document.createElement('div');
-    historyItem.className = 'history-item';
-    historyItem.textContent = value;
-    historyDiv.prepend(historyItem); // Add new items to the top
-  }
+// Function to add calculation result to the history panel
+function addHistory(result) {
+    const historyPanel = document.getElementById('history');
+    const newHistoryItem = document.createElement('div');
+    newHistoryItem.classList.add('history-item');
+    newHistoryItem.textContent = result;
+    historyPanel.prepend(newHistoryItem); // Add new history item to the top
 }
 
-// Function to trigger a shake effect
-function triggerShake() {
-  const calculator = document.querySelector('.calculator');
-  calculator.classList.add('shake');
-  setTimeout(() => calculator.classList.remove('shake'), 500);
+// Function to handle copy to clipboard
+function copyToClipboard() {
+    const display = document.querySelector('.display input');
+    if (display.value) {
+        navigator.clipboard.writeText(display.value)
+            .then(() => {
+                alert('Copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    } else {
+        alert('Nothing to copy');
+    }
 }
 
-// Function to toggle the theme
+// Function to toggle between Jedi and Sith themes
 function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle('sith-theme');
-  body.classList.toggle('jedi-theme');
+    document.body.classList.toggle('jedi-theme');
+    document.body.classList.toggle('sith-theme');
 }
 
-// Uncomment and configure these functions when audio is available
-// function playSound(soundName) {
-//   const audio = new Audio(`sounds/${soundName}.mp3`);
-//   audio.play().catch(e => console.error('Audio playback error:', e));
-// }
+// Function to handle keypresses on PC only
+function handleKeyPress(event) {
+    if (window.innerWidth >= 601) { // PC size
+        const key = event.key;
+        const display = document.querySelector('.display input');
+        if (key >= '0' && key <= '9' || ['+', '-', '*', '/'].includes(key)) {
+            display.value += key;
+        } else if (key === 'Enter') {
+            evaluateExpression();
+        } else if (key === 'Backspace') {
+            display.value = display.value.slice(0, -1);
+        } else if (key === '.') {
+            display.value += '.';
+        }
+    }
+}
+
+// Add event listener for keypresses
+document.addEventListener('keypress', handleKeyPress);
