@@ -198,262 +198,7 @@ body.sith-theme #copy-button:active {
   color: white;
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.switch-theme-button:hover {
-  transform: translateX(-50%) scale(1.1) rotate(3deg);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
-}
-
-/* Cursor */
-body {
   cursor: url('lightsaber-cursor.png'), auto;
-}
-
-/* Particle Effect */
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: particle-animation 0.6s ease-out forwards;
-}
-
-@keyframes particle-animation {
-  from {
-      transform: translate(0, 0) scale(1);
-      opacity: 1;
-  }
-  to {
-      transform: translate(100px, -100px) scale(0);
-      opacity: 0;
-  }
-}
-
-/* Shake Effect */
-.shake {
-  animation: screenShake 0.5s;
-}
-
-@keyframes screenShake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-/* General Styles */
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Orbitron', sans-serif;
-  box-sizing: border-box;
-}
-
-/* Container and Calculator Styles */
-.container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at 50% 50%, #000000 0%, #050A30 100%);
-  overflow: hidden;
-  position: relative;
-}
-
-.calculator {
-  background: #3a4452;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  width: 400px; /* Adjust width as needed */
-  position: relative;
-}
-
-/* History Panel Styles */
-.history-panel {
-  position: absolute; /* Position relative to the closest positioned ancestor */
-  top: 20px; /* Distance from the top of the container */
-  right: 20px; /* Adjust this value to position it within the viewable area */
-  background: #1f2c34; /* Default background */
-  border-radius: 10px;
-  padding: 10px;
-  color: #fff;
-  max-width: 250px;
-  max-height: 400px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column-reverse; /* Newest items on top */
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
-}
-
-/* Ensure the parent container (.calculator) is positioned */
-.calculator {
-  position: relative; /* Make sure .history-panel is positioned relative to this */
-}
-
-/* History Item Styles */
-.history-item {
-  border-bottom: 1px solid #444;
-  padding: 5px 0;
-}
-
-/* Button Styles */
-.calculator form input {
-  border: 0;
-  outline: 0;
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
-  background: transparent;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-  margin: 10px;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-}
-
-.calculator form input:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
-  transform: scale(1.1);
-}
-
-.calculator form input:active {
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Display Styles */
-form .display {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-form .display input {
-  text-align: right;
-  font-size: 45px;
-  color: white;
-  background: transparent;
-  border: none;
-  width: calc(100% - 70px); /* Adjust to accommodate copy button */
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* Copy Button Styles */
-#copy-button {
-  background-color: #00e6ff; /* Default color */
-  border: none;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  border-radius: 10px;
-  transition: background-color 0.3s, transform 0.3s;
-  height: 60px; /* Match the height of other buttons */
-  width: 60px; /* Match the width of other buttons */
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Add shadow for visibility */
-}
-
-#copy-button:hover {
-  background-color: #00b3cc;
-  transform: scale(1.1);
-}
-
-#copy-button:active {
-  background-color: #008299;
-}
-
-/* Jedi Theme */
-body.jedi-theme .container {
-  background: radial-gradient(circle at 50% 50%, #000000 0%, #1D2A5B 100%);
-}
-
-body.jedi-theme .calculator form input {
-  color: #00e6ff;
-}
-
-body.jedi-theme .history-panel {
-  background: #00e6ff; /* Background color for Jedi theme */
-  color: #000000; /* Text color for Jedi theme */
-}
-
-body.jedi-theme #copy-button {
-  background-color: #00e6ff; /* Jedi theme color */
-}
-
-body.jedi-theme #copy-button:hover {
-  background-color: #00b3cc;
-}
-
-body.jedi-theme #copy-button:active {
-  background-color: #008299;
-}
-
-/* Sith Theme */
-body.sith-theme .container {
-  background: radial-gradient(circle at 50% 50%, #000000 0%, #2A0000 100%);
-}
-
-body.sith-theme .calculator form input {
-  color: #FF0033;
-}
-
-body.sith-theme .calculator form input:hover {
-  box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
-}
-
-body.sith-theme .history-panel {
-  background: #FF0033; /* Background color for Sith theme */
-  color: #ffffff; /* Text color for Sith theme */
-}
-
-body.sith-theme #copy-button {
-  background-color: #FF0033; /* Sith theme color */
-}
-
-body.sith-theme #copy-button:hover {
-  background-color: #e53935;
-}
-
-body.sith-theme #copy-button:active {
-  background-color: #c62828;
-}
-
-/* Switch Theme Button */
-.switch-theme-button {
-  position: absolute;
-  bottom: 60px; /* Adjust to provide space for the clear history button */
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #00e6ff 0%, #FF0033 100%);
-  border: none;
-  border-radius: 10px;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -515,11 +260,47 @@ body {
     padding: 10px;
   }
 
+  /* Button Styles */
   .calculator form input {
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
-    margin: 5px;
+    border: 0;
+    outline: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    background: transparent;
+    font-size: 20px;
+    color: white;
+    cursor: url('lightsaber-cursor.png'), auto;
+    margin: 5px; /* Adjusted margin to fit more buttons */
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ensure the Copy button is visible and clickable */
+  .copy-button {
+    position: relative;
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+    text-align: center;
+    line-height: 60px; /* Center text vertically */
+  }
+
+  form .display input {
+    font-size: 20px;
+    width: calc(100% - 70px); /* Adjusted width to fit the container */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .history-panel {
@@ -527,12 +308,88 @@ body {
   }
 
   .switch-theme-button {
-    bottom: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
+    display: none; /* Hide the theme toggle button on mobile */
   }
 
-  form .display input {
-    font-size: 30px;
+  /* Mobile Menu Styles */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide the menu off-screen */
+    width: 250px;
+    height: 100%;
+    background: #333; /* Background color for the menu */
+    color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    transition: left 0.3s ease; /* Smooth sliding effect */
+    padding: 20px;
+    z-index: 1000; /* Ensure the menu is above other elements */
+  }
+
+  .mobile-menu-show {
+    left: 0; /* Show the menu */
+  }
+
+  .mobile-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .mobile-menu ul li {
+    margin: 10px 0;
+  }
+
+  .mobile-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  
+
+  /* Mobile Menu Toggle Button Styles */
+  .mobile-menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px; /* Adjusted width */
+    height: 50px; /* Adjusted height */
+    background: transparent; /* No background color */
+    color: #00704a; /* Starbucks green for the icon */
+    border: none;
+    font-size: 30px; /* Font size for the hamburger icon */
+    text-align: center;
+    line-height: 50px; /* Center icon vertically */
+    cursor: pointer;
+    z-index: 1001; /* Ensure it’s above other elements */
+    transition: color 0.3s ease; /* Transition for color change */
+  }
+
+  .mobile-menu-toggle:hover {
+    color: #cccccc; /* Darker green on hover */
+  }
+
+  .mobile-menu-toggle::before {
+    content: '\2630'; /* Unicode for hamburger icon */
+  }
+
+  /* Theme-based colors */
+  .jedi-theme .mobile-menu-toggle {
+    color: #fff; /* Light color for Jedi theme */
+  }
+
+  .sith-theme .mobile-menu-toggle {
+    color: #f00; /* Dark color for Sith theme */
+  }
+}
+
+/* Hide mobile menu and button on larger screens */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
   }
 }
