@@ -1,19 +1,33 @@
 {
   "name": "Star Wars Calculator",
   "version": "1.0.0",
-  "description": "Welcome to the Star Wars Calculator! This is a fun, themed calculator inspired by the Star Wars universe. The calculator features two distinct themes: Jedi (blue) and Sith (red), and includes a dynamic history panel.",
+  "description": "Welcome to the Star Wars Calculator! This is a fun, themed calculator inspired by the Star Wars universe.",
   "main": "main.js",
+  "build": {
+    "appId": "your.app.id",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        "squirrel"
+      ],
+      "icon": "images/appicon.ico"
+    },
+    "mac": {
+      "icon": "images/appicon.icns"
+    },
+    "homepage": "https://starwarscalc.netlify.app"
+  },
   "scripts": {
-    "start": "cross-env NODE_ENV=development electron-forge start",
-    "start:dev": "cross-env NODE_ENV=development electron-forge start", 
-    "start:prod": "cross-env NODE_ENV=production electron-forge start",
+    "start": "electron-forge start",
+    "start:dev": "cross-env NODE_ENV=development LOCAL_DEV=true electron-forge start",
+    "start:prod": "cross-env NODE_ENV=production LOCAL_DEV=false electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
     "@electron-forge/maker-deb": "^7.4.0",
@@ -23,12 +37,14 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
+    "cross-env": "^7.0.3",
     "electron": "^32.0.1",
-    "electron-reload": "^2.0.0-alpha.1",
-    "cross-env": "^7.0.3"
+    "electron-reload": "^2.0.0-alpha.1"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
-    "electron-updater": "^6.2.1"
+    "electron-updater": "^6.2.1",
+    "mathjs": "^13.2.0",
+    "winston": "^3.14.2"
   }
 }

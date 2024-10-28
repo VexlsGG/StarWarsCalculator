@@ -24,11 +24,17 @@
   border-radius: 10px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
+  width: 400px; /* Adjust width as needed */
+  position: relative;
 }
 
+/* History Panel Styles */
 .history-panel {
-  margin-left: 20px;
-  background: #1f2c34;
+  position: absolute; /* Position relative to the closest positioned ancestor */
+  top: 20px; /* Distance from the top of the container */
+  right: 20px; /* Adjust this value to position it within the viewable area */
+  background: #1f2c34; /* Default background */
   border-radius: 10px;
   padding: 10px;
   color: #fff;
@@ -37,9 +43,40 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse; /* Newest items on top */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
+}
+
+/* History Items */
+#history-list {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+#history-list li {
+  margin-bottom: 10px; /* Space between history items */
+  font-size: 14px; /* Adjust font size */
+  word-wrap: break-word; /* Ensure long numbers or expressions break */
+}
+
+/* Optional: Customize appearance of scrollbar */
+#history-panel::-webkit-scrollbar {
+  width: 5px;
+}
+
+#history-panel::-webkit-scrollbar-thumb {
+  background-color: #555; /* Dark scrollbar */
+  border-radius: 5px;
 }
 
 
+/* Ensure the parent container (.calculator) is positioned */
+.calculator {
+  position: relative; /* Make sure #history-panel is positioned relative to this */
+}
+
+
+/* History Item Styles */
 .history-item {
   border-bottom: 1px solid #444;
   padding: 5px 0;
@@ -74,23 +111,73 @@
 }
 
 /* Display Styles */
+form .display {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 form .display input {
   text-align: right;
   font-size: 45px;
   color: white;
   background: transparent;
   border: none;
-  width: 100%;
-  box-shadow: none;
+  width: calc(100% - 70px); /* Adjust to accommodate copy button */
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-/* Jedi Theme */
+/* Copy Button Styles */
+#copy-button {
+  background-color: #00e6ff; /* Default color */
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+  height: 60px; /* Match the height of other buttons */
+  width: 60px; /* Match the width of other buttons */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Add shadow for visibility */
+}
+
+#copy-button:hover {
+  background-color: #00b3cc;
+  transform: scale(1.1);
+}
+
+#copy-button:active {
+  background-color: #008299;
+}
+
 body.jedi-theme .container {
   background: radial-gradient(circle at 50% 50%, #000000 0%, #1D2A5B 100%);
 }
 
 body.jedi-theme .calculator form input {
   color: #00e6ff;
+}
+
+body.jedi-theme .history-panel {
+  background: #00e6ff; /* Background color for Jedi theme */
+  color: #000000; /* Text color for Jedi theme */
+}
+
+body.jedi-theme #copy-button {
+  background-color: #00e6ff; /* Jedi theme color */
+}
+
+body.jedi-theme #copy-button:hover {
+  background-color: #00b3cc;
+}
+
+body.jedi-theme #copy-button:active {
+  background-color: #008299;
 }
 
 /* Sith Theme */
@@ -106,12 +193,29 @@ body.sith-theme .calculator form input:hover {
   box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.7);
 }
 
+body.sith-theme .history-panel {
+  background: #FF0033; /* Background color for Sith theme */
+  color: #ffffff; /* Text color for Sith theme */
+}
+
+body.sith-theme #copy-button {
+  background-color: #FF0033; /* Sith theme color */
+}
+
+body.sith-theme #copy-button:hover {
+  background-color: #e53935;
+}
+
+body.sith-theme #copy-button:active {
+  background-color: #c62828;
+}
+
+
 /* Switch Theme Button */
 .switch-theme-button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  bottom: 20px; /* Adjust this value to ensure the button is not too close to the bottom */
+  right: 20px; /* Adjust this value to position it correctly within the window */
   background: linear-gradient(135deg, #00e6ff 0%, #FF0033 100%);
   border: none;
   border-radius: 10px;
@@ -123,13 +227,13 @@ body.sith-theme .calculator form input:hover {
 }
 
 .switch-theme-button:hover {
-  transform: translateX(-50%) scale(1.1) rotate(3deg);
+  transform: scale(1.1) rotate(3deg);
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
 }
 
 /* Cursor */
 body {
-  cursor: url('lightsaber-cursor.png'), auto;
+  cursor: url(../Images/lightsaber-cursor.png), auto;
 }
 
 /* Particle Effect */
@@ -171,4 +275,190 @@ body {
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* Mobile-Specific Styles */
+@media screen and (max-width: 768px) {
+  .calculator {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .clear-history-button {
+    display: block !important;
+  }
+  /* Button Styles */
+  .calculator form input {
+    border: 0;
+    outline: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    background: transparent;
+    font-size: 20px;
+    color: white;
+    cursor: url('lightsaber-cursor.png'), auto;
+    margin: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ensure the Copy button is visible and clickable */
+  .copy-button {
+    position: relative;
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 10px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  form .display input {
+    font-size: 20px;
+    width: calc(100% - 70px);
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .history-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #1f2c34;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    max-width: 250px;
+    max-height: 100px; /* Limit height for scrolling */
+    overflow-y: auto; /* Enable scrolling */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column-reverse; /* Newest items on top */
+  }
+
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .timestamp {
+    display: none; /* Hide timestamp on mobile */
+  }
+
+  .switch-theme-button {
+    display: none; /* Hide the theme toggle button on mobile */
+  }
+
+  .clear-history-button {
+    display: none;
+  }
+
+  /* Mobile Menu Styles */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #333;
+    color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    transition: left 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  .mobile-menu-show {
+    left: 0; /* Show the menu */
+  }
+
+  .mobile-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .mobile-menu ul li {
+    margin: 10px 0;
+  }
+
+  .mobile-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  /* Mobile Menu Toggle Button Styles */
+  .mobile-menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    color: #00704a;
+    border: none;
+    font-size: 30px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    color: #cccccc;
+  }
+
+  .mobile-menu-toggle::before {
+    content: '\2630'; /* Unicode for hamburger icon */
+  }
+
+  /* Theme-based colors */
+  .jedi-theme .mobile-menu-toggle {
+    color: #fff; /* Light color for Jedi theme */
+  }
+
+  .sith-theme .mobile-menu-toggle {
+    color: #f00; /* Dark color for Sith theme */
+  }
+}
+
+/* Hide mobile menu and button on larger screens */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+  }
+}
+
+.clear-history-button {
+  position: fixed;
+  bottom: 75px;
+  right: 20px;
+  background: #f00; /* Red background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1002; /* Ensure it appears above other elements */
+}
+
+.clear-history-button:hover {
+  background: #d00; /* Darker red on hover */
 }
